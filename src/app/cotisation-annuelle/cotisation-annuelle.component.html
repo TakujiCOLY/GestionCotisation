@@ -1,0 +1,176 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="row mb-3">
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Ajouter cotisation annuelle</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="cotisationAddForm" (ngSubmit)="addCotisation()">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Libelle</label>
+                                        <input type="text" class="form-control" placeholder="Libelle"
+                                            formControlName="libelle"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.libelle.errors}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Année</label>
+                                        <input type="text" class="form-control" placeholder="Année"
+                                            formControlName="annee"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.annee.errors}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Montant</label>
+                                        <input type="text" class="form-control" placeholder="Montant"
+                                            formControlName="montant"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.montant.errors}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Don matériel</label>
+                                        <div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="exampleRadios2"
+                                                    value="true" formControlName="donMateriel"
+                                                    [ngClass]="{'is-invalid': submittedAdd && f.donMateriel.errors}">
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    Oui
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="exampleRadios1"
+                                                    value="false" formControlName="donMateriel"
+                                                    [ngClass]="{'is-invalid': submittedAdd && f.donMateriel.errors}" checked>
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Non
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Catégorie</label>
+                                        <select class="form-control" formControlName="categorie" 
+                                        [ngClass]="{'is-invalid': submittedAdd && f.categorie.errors}">
+                                            <option value="">Choisir la catégorie</option>
+                                            <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.nom}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Promoteur cotisation</label>
+                                        <select class="form-control" formControlName="promoteur" 
+                                        [ngClass]="{'is-invalid': submittedAdd && f.promoteur.errors}">
+                                            <option value="">Choisir le promoteur</option>
+                                            <option *ngFor="let promoteur of promoteurs" value="{{promoteur.id}}">{{promoteur.nom}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-success mr-sm-2">Enregistrer</button>
+                                <button class="btn btn-secondary">Effacer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Rechercher cotisation annuelle</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="cotisationSearchForm" (ngSubmit)="searchCotisation()">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Année</label>
+                                        <input type="text" class="form-control" placeholder="Année" formControlName="annee">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Catégorie</label>
+                                        <select class="form-control" formControlName="categorie">
+                                            <option value="">Choisir la catégorie</option>
+                                            <option *ngFor="let categorie of categories" value="{{categorie.nom}}">{{categorie.nom}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Promoteur cotisation</label>
+                                        <select class="form-control" formControlName="promoteur">
+                                            <option value="">Choisir le promoteur</option>
+                                            <option *ngFor="let promoteur of promoteurs" value="{{promoteur.nom}}">{{promoteur.nom}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="submittedSearch" class="alert alert-danger text-center">
+                                Veuillez saisir ou choisir au moins un champs
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="card-header__title">Liste des cotisations annuelles</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-sm">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Libelle</th>
+                            <th>Année</th>
+                            <th>Montant</th>
+                            <th>Don Matériel</th>
+                            <th>Catégorie</th>
+                            <th>Promoteur</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr
+                            *ngFor="let cotisation of cotisationAnnuelles | paginate: {itemsPerPage: 10, currentPage: p}">
+                            <td>{{cotisation.libelle}}</td>
+                            <td>{{cotisation.annee}}</td>
+                            <td>{{cotisation.montant}}</td>
+                            <td>{{cotisation.donMateriel}}</td>
+                            <td>{{cotisation.categorie.nom}}</td>
+                            <td>{{cotisation.promoteurCotisation.nom}}</td>
+                            <td>
+                                <a (click)="getCotisation(cotisation)" class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
+                                    title="Modifier la cotisation"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
+                                    title="Supprimer la cotisation"><i class="fa fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right" *ngIf="cotisationAnnuelles">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

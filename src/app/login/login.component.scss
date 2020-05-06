@@ -1,0 +1,69 @@
+.app-login {
+  width: 100%;
+  background: #000000;
+  padding-bottom: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transition: width 0.3s linear;
+  transition: width 0.3s linear;
+}
+
+.form-outer {
+  min-height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px 0;
+  position: relative;
+}
+
+.form-inner {
+  padding: 40px 30px;
+  background: #fff;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 100%;
+
+  .title h4 {
+    font-size: 2em;
+    font-weight: 500;
+  }
+
+  form {
+    margin: 2rem auto 1rem;
+    max-width: 300px;
+
+    .form-group-material {
+      position: relative;
+      margin-bottom: 30px;
+
+      .input-material {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+        color: #868e96;
+        font-weight: 300;
+
+        &:focus {
+          border-color: #33b35a;
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.copyrights {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+
+  p {
+    font-size: 0.85em;
+    font-weight: 400;
+    color: white;
+  }
+}

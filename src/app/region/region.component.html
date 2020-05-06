@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-md-5 col-sm-5">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Ajouter une région</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="regionAddForm" (ngSubmit)="addRegion()">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.nom.errors}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Pays</label>
+                                        <select class="form-control" formControlName="pays"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.pays.errors}">
+                                            <option value="">Choisir Pays</option>
+                                            <option *ngFor="let pay of pays" value="{{pay.id}}">{{pay.nom}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-success mr-sm-2">Enregistrer</button>
+                                <button (click)="effacerChamps()" class="btn btn-secondary">Effacer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Rechercher une région</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="regionSearchForm" (ngSubmit)="searchRegion()">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Pays</label>
+                                        <select class="form-control" formControlName="pays">
+                                            <option value="">Choisir pays</option>
+                                            <option *ngFor="let pay of pays" value="{{pay.nom}}">{{pay.nom}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="submittedSearch" class="alert alert-danger text-center">
+                                Veuillez saisir au moins un champs
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-7">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="card-header__title">Liste des régions</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-sm">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Pays</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr *ngFor="let region of regions | paginate: {itemsPerPage: 10, currentPage: p}">
+                            <td>{{region.nom}}</td>
+                            <td>{{region.pays.nom}}</td>
+                            <td>
+                                <a (click)="getRegion(region)" class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
+                                    title="Modifier la cotisation"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
+                                    title="Supprimer la cotisation"><i class="fa fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right" *ngIf="regions">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

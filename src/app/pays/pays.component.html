@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-md-5 col-sm-5">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Ajouter un pays</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="paysAddForm" (ngSubmit)="addPays()" class="form-inline">
+                            <label class="mr-sm-2">Nom</label>
+                            <input type="text" class="form-control mr-sm-2" placeholder="Nom catégorie"
+                                formControlName="nom" [ngClass]="{'is-invalid': submittedAdd && f.nom.errors}">
+                            <button type="submit" class="btn btn-success mr-sm-2">Enregistrer</button>
+                            <button (click)="effacerChamps()" class="btn btn-secondary">Effacer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Rechercher un pays</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <form [formGroup]="paysSearchForm" (ngSubmit)="searchPays()" class="form-inline">
+                            <label class="mr-sm-2">Nom</label>
+                            <input type="text" class="form-control mr-sm-2" placeholder="Nom catégorie"
+                                formControlName="nom" [ngClass]="{'is-invalid': submittedSearch && fSearch.nom.errors}">
+                            <button type="submit" class="btn btn-primary mr-sm-2">Rechercher</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-7">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="card-header__title">Liste des pays</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-sm">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Nom</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr
+                            *ngFor="let pay of pays | paginate : {itemsPerPage: 10, currentPage: p}">
+                            <td>{{pay.nom}}</td>
+                            <td>
+                                <a (click)="getPays(pay)" class="btn btn-success" data-toggle="tooltip"
+                                    data-placement="bottom" title="Modifier la catégorie"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
+                                    title="Supprimer la catégorie"><i class="fa fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right" *ngIf="pays">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

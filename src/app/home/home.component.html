@@ -1,0 +1,71 @@
+<header class="app-header">
+    <a href="#" class="app-sidebar__toggle" data-toggle="sidebar" aria-label="Hide sidebar">
+        <span class="fa fa-bars"></span>
+    </a>
+    <a href="#" routerLink="/accueil" class="app-header__logo">{{titreApp}}</a>
+    <ul class="app-nav">
+        <li class="app-nav-user">Prenom Nom</li>
+        <li class="dropdown">
+            <a href="#" class="app-nav__item" data-toggle="dropdown" aria-label="Open Menu">
+                <i class="fa fa-user"></i>
+            </a>
+            <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                <li><a href="#" class="dropdown-item"><i class="fa fa-cog"></i> Parametres</a></li>
+                <li><a href="#" class="dropdown-item"><i class="fa fa-user"></i> Profil</a></li>
+                <li><a href="#" class="dropdown-item"><i class="fa fa-sign-out-alt"></i> Deconnexion</a></li>
+            </ul>
+        </li>
+    </ul>
+</header>
+<aside class="app-sidebar">
+    <h5 class="app-sidebar-title">Menu</h5>
+    <ul class="app-menu">
+        <li><a class="app-menu__item" href="#" routerLink="/accueil" routerLinkActive="active-link"><i
+                    class="fa fa-home"></i>Accueil</a></li>
+        <li><a class="app-menu__item" href="#" routerLink="/cotisations" routerLinkActive="active"><i
+                    class="fa fa-chart-bar"></i>Rapport cotisations</a></li>
+        <li><a class="app-menu__item" href="#" routerLink="/membres" routerLinkActive="active-link"><i
+                    class="fa fa-users"></i>Membres</a></li>
+        <li><a class="app-menu__item" href="#" data-toggle="collapse" href="#reglageCotisation"
+                data-target="#reglageCotisation" aria-expanded="false" routerLinkActive="active"><i
+                    class="fa fa-money-check-alt"></i>Paramètre
+                cotisation</a>
+            <ul id="reglageCotisation" class="collapse app-menu-sub">
+                <li><a class="app-menu__item__sub" href="#" routerLink="/cotisations-annuelles"
+                        routerLinkActive="active"><i class="fa fa-money-bill"></i>Cotisation Annuelle</a></li>
+                <li><a class="app-menu__item__sub" href="#" routerLink="/categories" routerLinkActive="active"><i
+                            class="far fa-address-card"></i>Catégorie cotisation</a></li>
+                <li><a class="app-menu__item__sub" href="#" routerLink="/promoteur-cotisation"
+                        routerLinkActive="active"><i class="far fa-calendar-alt"></i>Promoteur cotisation</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="app-menu__item" href="#" data-toggle="collapse" href="#autresParametres"
+                data-target="#autresParametres" aria-expanded="false" routerLinkActive="active"><i
+                    class="fa fa-cog"></i>Autres paramètres</a>
+            <ul id="autresParametres" class="collapse app-menu-sub">
+                <li><a class="app-menu__item__sub" href="#" routerLink="/pays"
+                        routerLinkActive="active"><i class="far fa-folder-open"></i>Pays</a></li>
+                <li><a class="app-menu__item__sub" href="#" routerLink="/regions" routerLinkActive="active"><i
+                            class="far fa-folder-open"></i>Régions</a></li>
+                <li><a class="app-menu__item__sub" href="#" routerLink="/departements"
+                        routerLinkActive="active"><i class="far fa-folder-open"></i>Départements</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+<div class="app-content">
+    <router-outlet></router-outlet>
+</div>
+<footer class="app-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                {{nomAssociation}} © {{annee | date:'yyyy'}} - Tous droits réservés
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 text-right">
+                Designed by Takuji
+            </div>
+        </div>
+    </div>
+</footer>

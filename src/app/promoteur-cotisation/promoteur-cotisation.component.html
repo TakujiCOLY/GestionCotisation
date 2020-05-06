@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-md-5 col-sm-5">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Ajouter un promoteur</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="promoteurAddForm" (ngSubmit)="addPromoteur()">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.nom.errors}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Lieu</label>
+                                        <input type="text" class="form-control" placeholder="Lieu"
+                                            formControlName="lieu"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.lieu.errors}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Siège</label>
+                                        <input type="text" class="form-control" placeholder="Siège"
+                                            formControlName="siege"
+                                            [ngClass]="{'is-invalid': submittedAdd && f.siege.errors}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-success mr-sm-2">Enregistrer</button>
+                                <button (click)="effacerChamps()" class="btn btn-secondary">Effacer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-header__title">Rechercher un promoteur</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="promoteurSearchForm" (ngSubmit)="searchPromoteur()">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Lieu</label>
+                                        <input type="text" class="form-control" placeholder="Lieu" formControlName="lieu">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label>Siège</label>
+                                        <input type="text" class="form-control" placeholder="Siège" formControlName="siege">
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="submittedSearch" class="alert alert-danger">
+                                Veuillez saisir au moins un champs
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-7">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="card-header__title">Liste des départements</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-sm">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Lieu</th>
+                            <th>Siège</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr
+                            *ngFor="let promoteur of promoteurs | paginate: {itemsPerPage: 10, currentPage: p}">
+                            <td>{{promoteur.nom}}</td>
+                            <td>{{promoteur.lieu}}</td>
+                            <td>{{promoteur.siege}}</td>
+                            <td>
+                                <a (click)="getPromoteur(promoteur)" class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
+                                    title="Modifier la cotisation"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
+                                    title="Supprimer la cotisation"><i class="fa fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right" *ngIf="promoteurs">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

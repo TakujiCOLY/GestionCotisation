@@ -1,0 +1,116 @@
+<div class="row mb-3">
+    <div class="col-md-4 col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-header__title">Identification</h6>
+                <a href="#" routerLink="/membre-update" class="btn btn-success" data-toggle="tooltip"
+                    data-placement="bottom" title="Modifier"><i class="fa fa-edit"></i></a>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Prénom</label>
+                </div>
+                <div class="form-group">
+                    <label>Nom</label>
+                </div>
+                <div class="form-group">
+                    <label>Profession</label>
+                </div>
+                <div class="form-group">
+                    <label>Date de naissance</label>
+                </div>
+                <div class="form-group">
+                    <label>Numéro carte identé</label>
+                </div>
+                <div class="form-group">
+                    <label>Année adhésion</label>
+                </div>
+                <div class="form-group">
+                    <label>Téléphone</label>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                </div>
+                <div class="form-group">
+                    <label>Lieu résidence</label>
+                </div>
+                <div class="form-group">
+                    <label>Quartier à Tendouck</label>
+                </div>
+                <div class="form-group">
+                    <label>Concession</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-header__title">Historique cotisation</h6>
+                <a href="#" routerLink="/cotisation-add" class="btn btn-success" data-toggle="tooltip"
+                    data-placement="bottom" title="Ajouter une cotisation"><i class="fa fa-plus-circle"></i></a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Montant</th>
+                            <th>Don matériel</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr *ngFor="let cotisation of cotisations | paginate: {itemsPerPage: 9, currentPage: p}">
+                            <td>{{cotisation.montant}} FCFA</td>
+                            <td>{{cotisation.don}}</td>
+                            <td>{{cotisation.date}}</td>
+                            <td><a href="#" routerLink="/cotisation-update" class="btn btn-success"
+                                    data-toggle="tooltip" data-placement="bottom" title="Modifier la cotisation"><i
+                                        class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
+                                    title="Supprimer la cotisation"><i class="fa fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right" *ngIf="cotisations">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3 justify-content-center">
+    <div class="col-md-10 col-sm-10">
+        <div class="card">
+            <div class="card-header text-center">
+                <h6 class="card-header__title">Suivi des cotisations annuelles</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-sm">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Année</th>
+                            <th>Montant Annuel</th>
+                            <th>Montant cotisé</th>
+                            <th>Montant restant</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr
+                            *ngFor="let cotisation of cotisationAnnuelles | paginate: {itemsPerPage: 7, currentPage: p}">
+                            <td>{{cotisation.annee}}</td>
+                            <td>{{cotisation.montantAnnuel}} FCFA</td>
+                            <td>{{cotisation.montantCotise}} FCFA</td>
+                            <td>{{cotisation.montantRestant}} FCFA</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right" *ngIf="cotisations">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
