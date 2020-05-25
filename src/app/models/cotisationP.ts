@@ -6,5 +6,4 @@ export class CotisationP {
     detailDonMateriel: String;
     dateCotisation: Date;
     cotisationAnnuelle: CotisationAnnuelleP;
-    membreId: number; 
 }

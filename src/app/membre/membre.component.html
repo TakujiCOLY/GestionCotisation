@@ -1,57 +1,82 @@
 <div class="row">
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-3 col-sm-3">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-header__title">Rechercher membre</h4>
             </div>
             <div class="card-body">
-                <form>
-
+                <form [formGroup]="searchMembreForm" (ngSubmit)="searchMembre()">
+                    <div class="form-group">
+                        <label>Prénom</label>
+                        <input type="text" class="form-control" placeholder="Prénom" formControlName="prenom">
+                    </div>
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
+                    </div>
+                    <div class="form-group">
+                        <label>Catégorie</label>
+                        <select class="form-control" formControlName="categorie">
+                            <option value="">Choisir la Catégorie</option>
+                            <option *ngFor="let categorie of categories" value="{{categorie.nom}}">{{categorie.nom}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Rechercher</button>
+                    </div>
+                    <div *ngIf="submitted" class="alert alert-danger">
+                        Choississez au moins un champs
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-9 col-sm-9">
         <div class="card">
             <div class="card-header">
-                <div class="row justify-content-between">
-                    <div class="col-md col-sm">
-                        <h4 class="card-header__title">Liste des membres</h4>
-                    </div>
-                    <div class="col-md-3 col-sm-3 text-right">
-                        <a href="#" routerLink="/membre-add" class="btn btn-success"><i
-                                class="fa fa-plus-circle"></i></a>
-                    </div>
-                </div>
+                <h4 class="card-header__title">Liste des membres</h4>
+                <a href="#" routerLink="/membre-add" class="btn btn-success" data-toggle="tooltip"
+                    data-placement="bottom" title="Ajouter un membre"><i class="fa fa-plus-circle"></i></a>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-sm">
-                    
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Profession</th>
+                            <th>Catégorie</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let membre of membres | paginate : {itemsPerPage: 10, currentPage: p}">
+                            <td>{{membre.nom | uppercase}}</td>
+                            <td>{{membre.prenom}}</td>
+                            <td>{{membre.profession}}</td>
+                            <td>{{membre.categorie.nom}}</td>
+                            <td class="form-table">
+                                <form #detailForm="ngForm" (ngSubmit)="detailMembre(detailForm.value)">
+                                    <input type="hidden" name="id" [ngModel]="membre.id">
+                                    <button type="submit" class="btn btn-secondary" data-toggle="tooltip"
+                                        data-placement="bottom" title="Voir un membre"><i
+                                            class="fas fa-list-ul"></i></button>
+                                </form>
+                                <form #updateForm="ngForm" (ngSubmit)="updateMembre(updateForm.value)">
+                                    <input type="hidden" name="id" [ngModel]="membre.id">
+                                    <button type="submit" class="btn btn-primary" data-toggle="tooltip"
+                                        data-placement="bottom" title="Modifier un membre"><i
+                                            class="fa fa-edit"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Fenetre modal pour l'ajout de membre et la recherche de membre -->
-<div id="searchModalMembre" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Rechercher membre</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="">
-                <div class="modal-body">
+                <div class="text-right" *ngIf="membres">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Retour</button>
-                    <button type="submit" class="btn btn-primary btn-sm">Rechercher</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

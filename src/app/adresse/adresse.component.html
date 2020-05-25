@@ -1,1 +1,53 @@
-<p>adresse works!</p>
+<div class="card">
+    <div class="card-header">
+        <h4>Ajouter l'adresse </h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="adresseForm" (ngSubmit)="addAdresse()">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label>Quartier origine</label>
+                        <input type="text" class="form-control" placeholder="Quartier" formControlName="quartier">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label>Concession</label>
+                        <input type="text" class="form-control" placeholder="Concession" formControlName="concession">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label>Pays</label>
+                        <select class="form-control" (change)="getRegion($event)" formControlName="pays">
+                            <option value="">Choisir le pays</option>
+                            <option *ngFor="let pay of pays" value="{{pay.id}}">{{pay.nom}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label>Région</label>
+                        <select class="form-control" (change)="getDepartement($event)" formControlName="region">
+                            <option value="">Choisir la région</option>
+                            <option *ngFor="let region of regions" value="{{region.id}}">{{region.nom}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label>Département</label>
+                        <select class="form-control" formControlName="departement">
+                            <option value="">Choisir le département</option>
+                            <option *ngFor="let departement of departements" value="{{departement.id}}">{{departement.nom}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>

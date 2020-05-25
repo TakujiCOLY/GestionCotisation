@@ -1,7 +1,7 @@
 export class Membre {
   nom: String;
   prenom: String;
-  dateNaissance: Date;
+  dateNaissance: string;
   anneeAdhesion: String;
   profession: String;
   telephone: String;

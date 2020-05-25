@@ -26,6 +26,8 @@ import { RegionComponent } from './region/region.component';
 import { DepartementComponent } from './departement/departement.component';
 import { AdresseComponent } from './adresse/adresse.component';
 import { PromoteurCotisationComponent } from './promoteur-cotisation/promoteur-cotisation.component';
+import { MembreUpComponent } from './membre-up/membre-up.component';
+import { AdresseUpdateComponent } from './adresse-update/adresse-update.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { PromoteurCotisationComponent } from './promoteur-cotisation/promoteur-c
     RegionComponent,
     DepartementComponent,
     AdresseComponent,
-    PromoteurCotisationComponent
+    PromoteurCotisationComponent,
+    MembreUpComponent,
+    AdresseUpdateComponent
   ],
   imports: [
     BrowserModule,

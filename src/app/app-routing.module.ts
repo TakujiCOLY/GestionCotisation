@@ -18,6 +18,8 @@ import { PaysComponent } from './pays/pays.component';
 import { RegionComponent } from './region/region.component';
 import { DepartementComponent } from './departement/departement.component';
 import { AdresseComponent } from './adresse/adresse.component';
+import { MembreUpComponent } from './membre-up/membre-up.component';
+import { AdresseUpdateComponent } from './adresse-update/adresse-update.component';
 
 const routes: Routes = [
   {
@@ -26,15 +28,16 @@ const routes: Routes = [
       { path: 'accueil', component: AccueilComponent },
       { path: 'membres', component: MembreComponent },
       { path: 'membre-add', component: MembreAddComponent },
-      { path: 'membre-update/:id', component: MembreUpdateComponent },
+      { path: 'membre-upd/:id', component: MembreUpComponent },
       { path: 'membre-detail/:id', component: MembreDetailComponent },
       { path: 'cotisations', component: CotisationComponent },
-      { path: 'membre-detail/:id/cotisation-add', component: CotisationAddComponent },
-      { path: 'membre-detail/:id/cotisation-update/:id_cot', component: CotisationUpdateComponent },
-      { path: 'membre-detail/:id/adresse-add', component: AdresseComponent },
-      { path: 'cotisations-annuelles', component: CotisationAnnuelleComponent },
+      { path: 'membre-detail/:id/cot-add', component: CotisationAddComponent },
+      { path: 'membre-detail/:id/cot-upd/:id_cot', component: CotisationUpdateComponent },
+      { path: 'membre-detail/:id/adr-add', component: AdresseComponent },
+      { path: 'membre-detail/:id/adr-upd/:id_adr', component: AdresseUpdateComponent },
+      { path: 'cot-annuelles', component: CotisationAnnuelleComponent },
       { path: 'categories', component: CategorieComponent },
-      { path: 'promoteur-cotisation', component: PromoteurCotisationComponent },
+      { path: 'promoteur-cot', component: PromoteurCotisationComponent },
       { path: 'pays', component: PaysComponent },
       { path: 'regions', component: RegionComponent },
       { path: 'departements', component: DepartementComponent },

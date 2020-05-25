@@ -6,18 +6,54 @@
 }
 
 .card-header {
-  padding: 1rem 1.25rem;
+  padding: .75rem 1rem;
   background-color: #fff;
   border-bottom: 1px solid #eee;
+  display: flex;
 
-  h4 {
-    font-size: 1.1rem;
+  .card-header__title {
+    flex: 1 0 auto;
+    font-size: 1rem;
     font-weight: bold;
+  }
+
+  .btn {
+    padding: .2rem .5rem;
+    font-size: .7rem;
   }
 }
 
 .card-body {
-  padding: 1.25rem;
+  padding: 1rem;
+
+  label {
+    font-size: .9rem;
+    font-weight: bold;
+  }
+
+  .form-control {
+    height: calc(2rem + 1px);
+    padding: .45rem .75rem;
+    font-size: .8rem;
+    line-height: 1.5;
+    color: #495057;
+    border-radius: 0;
+  }
+
+  .table {
+    font-size: .9rem;
+    color: #666666;
+
+    .form-table {
+      display: flex;
+      justify-content: center;
+
+      .btn {
+        padding: .2rem .5rem;
+        font-size: .7rem;
+      }
+    }
+  }
 }
 
 .btn {
