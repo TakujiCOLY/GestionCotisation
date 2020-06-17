@@ -17,7 +17,7 @@ import java.util.Collection;
 public class PromoteurCotisation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nom;
     private String lieu;
     private String siege;

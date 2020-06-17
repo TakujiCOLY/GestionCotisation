@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RepositoryRestResource
-public interface RegionRepository extends JpaRepository<Region, Integer> {
+public interface RegionRepository extends JpaRepository<Region, Long> {
     @RestResource(path = "/tri")
     public List<Region> findByOrderByNomAsc();
 

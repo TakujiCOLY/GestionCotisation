@@ -7,7 +7,7 @@ import java.util.List;
 
 @Projection(name = "M", types = Membre.class)
 public interface MembreProjection {
-    public int getId();
+    public Long getId();
     public String getNom();
     public String getPrenom();
     public String getDateNaissance();
@@ -16,6 +16,8 @@ public interface MembreProjection {
     public String getTelephone();
     public String getMail();
     public String getLieuResidence();
+	public String getQuartierOrigine();
+	public String getConcession();
     public Categorie getCategorie();
-    public List<AdresseProjection> getAdresses();
+    public RegionProjection getRegion();
 }

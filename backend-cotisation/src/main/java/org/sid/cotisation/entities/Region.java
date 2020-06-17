@@ -17,10 +17,10 @@ import java.util.Collection;
 public class Region implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nom;
     @ManyToOne
     private Pays pays;
     @OneToMany(mappedBy = "region")
-    private Collection<Departement> departements;
+    private Collection<Membre> membres;
 }

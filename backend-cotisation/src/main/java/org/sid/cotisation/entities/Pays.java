@@ -17,7 +17,7 @@ import java.util.Collection;
 public class Pays implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nom;
     @OneToMany(mappedBy = "pays")
     private Collection<Region> regions;

@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ import java.util.Date;
 public class Membre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nom;
     private String prenom;
     private String dateNaissance;
@@ -28,10 +29,12 @@ public class Membre implements Serializable {
     private String telephone;
     private String mail;
     private String lieuResidence;
+    private String quartierOrigine;
+    private String concession;
     @ManyToOne
     private Categorie categorie;
+    @ManyToOne
+    private Region region;
     @OneToMany(mappedBy = "membre")
     private Collection<Cotisation> cotisations;
-    @OneToMany(mappedBy = "membre")
-    private Collection<Adresse> adresses;
 }

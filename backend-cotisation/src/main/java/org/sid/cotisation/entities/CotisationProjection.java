@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Projection(name = "Ct", types = Cotisation.class)
 public interface CotisationProjection {
-    public int getId();
+    public Long getId();
     public int getMontant();
     public String getDetailDonMateriel();
     public Date getDateCotisation();

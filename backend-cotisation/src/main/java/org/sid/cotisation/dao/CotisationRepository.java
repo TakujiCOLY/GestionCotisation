@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin("http://localhost:4200")
 @RepositoryRestResource
-public interface CotisationRepository extends JpaRepository<Cotisation, Integer> {
+public interface CotisationRepository extends JpaRepository<Cotisation, Long> {
     @RestResource(path = "/byMembre")
-    List<Cotisation> findByMembreIdOrderByDateCotisationDesc(@Param("membre") int id);
+    List<Cotisation> findByMembreIdOrderByDateCotisationDesc(@Param("membre") Long id);
 }

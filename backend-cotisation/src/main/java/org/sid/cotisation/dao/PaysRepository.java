@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RepositoryRestResource
-public interface PaysRepository extends JpaRepository<Pays, Integer> {
+public interface PaysRepository extends JpaRepository<Pays, Long> {
     @RestResource(path = "/byNom")
     public List<Pays> findByNomContains(@Param("nom") String nom);
 

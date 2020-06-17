@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.config.Projection;
 
 @Projection(name = "CA", types = CotisationAnnuelle.class)
 public interface CotisationAnnuelleProjection {
-    public int getId();
+    public Long getId();
     public String getLibelle();
     public String getAnnee();
     public int getMontant();

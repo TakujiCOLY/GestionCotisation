@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 25 mai 2020 à 19:03
+-- Généré le :  mer. 17 juin 2020 à 19:22
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.4
 
@@ -25,25 +25,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `adresse`
---
-
-CREATE TABLE `adresse` (
-  `id` int(11) NOT NULL,
-  `quartier_origine` varchar(255) DEFAULT NULL,
-  `concession` varchar(255) DEFAULT NULL,
-  `Membre_id` int(11) NOT NULL,
-  `Departement_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `categorie`
 --
 
 CREATE TABLE `categorie` (
-  `id` int(11) NOT NULL,
+  `id` bigint(8) NOT NULL,
   `nom` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -70,12 +56,12 @@ INSERT INTO `categorie` (`id`, `nom`) VALUES
 --
 
 CREATE TABLE `cotisation` (
-  `id` int(11) NOT NULL,
+  `id` bigint(8) NOT NULL,
   `montant` int(11) DEFAULT NULL,
   `detail_don_materiel` varchar(255) DEFAULT NULL,
   `date_cotisation` date DEFAULT NULL,
-  `Membre_id` int(11) NOT NULL,
-  `Cotisation_Annuelle_id` int(11) NOT NULL
+  `Membre_id` bigint(8) NOT NULL,
+  `Cotisation_Annuelle_id` bigint(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -83,11 +69,12 @@ CREATE TABLE `cotisation` (
 --
 
 INSERT INTO `cotisation` (`id`, `montant`, `detail_don_materiel`, `date_cotisation`, `Membre_id`, `Cotisation_Annuelle_id`) VALUES
-(1, 5000, NULL, '2020-05-12', 6, 1),
-(2, 5000, NULL, '2020-05-19', 6, 1),
-(4, 5000, NULL, '2020-05-18', 6, 3),
-(5, 5000, NULL, '2020-05-04', 6, 4),
-(6, 2000, NULL, '2020-05-21', 6, 4);
+(1, 5000, NULL, '2020-05-12', 1, 1),
+(2, 5000, NULL, '2020-05-19', 1, 1),
+(4, 5000, NULL, '2020-05-18', 1, 3),
+(5, 5000, NULL, '2020-05-04', 1, 4),
+(6, 2000, NULL, '2020-05-21', 1, 4),
+(7, 5000, NULL, '2017-01-10', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -96,45 +83,24 @@ INSERT INTO `cotisation` (`id`, `montant`, `detail_don_materiel`, `date_cotisati
 --
 
 CREATE TABLE `cotisation_annuelle` (
-  `id` int(11) NOT NULL,
+  `id` bigint(8) NOT NULL,
   `libelle` varchar(255) DEFAULT NULL,
   `annee` varchar(255) DEFAULT NULL,
   `montant` int(11) DEFAULT NULL,
   `don_materiel` tinyint(4) DEFAULT NULL,
-  `Categorie_id` int(11) NOT NULL,
-  `Promoteur_Cotisation_id` int(11) NOT NULL
+  `Promoteur_Cotisation_id` bigint(8) NOT NULL,
+  `Categorie_id` bigint(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `cotisation_annuelle`
 --
 
-INSERT INTO `cotisation_annuelle` (`id`, `libelle`, `annee`, `montant`, `don_materiel`, `Categorie_id`, `Promoteur_Cotisation_id`) VALUES
+INSERT INTO `cotisation_annuelle` (`id`, `libelle`, `annee`, `montant`, `don_materiel`, `Promoteur_Cotisation_id`, `Categorie_id`) VALUES
 (1, 'libelle', '2020', 10000, 0, 1, 1),
-(2, 'libelle', '2020', 5000, 0, 3, 1),
-(3, 'Participation pour la caisse du village', '2020', 5000, 1, 1, 2),
-(4, NULL, '2020', 7000, 1, 1, 3);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `departement`
---
-
-CREATE TABLE `departement` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) DEFAULT NULL,
-  `Region_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `departement`
---
-
-INSERT INTO `departement` (`id`, `nom`, `Region_id`) VALUES
-(1, 'Pikine', 1),
-(2, 'Birkama', 2),
-(3, 'Dakar', 1);
+(2, 'libelle', '2020', 5000, 0, 1, 3),
+(3, 'Participation pour la caisse du village', '2020', 5000, 1, 2, 1),
+(4, NULL, '2020', 7000, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -143,29 +109,29 @@ INSERT INTO `departement` (`id`, `nom`, `Region_id`) VALUES
 --
 
 CREATE TABLE `membre` (
-  `id` int(11) NOT NULL,
+  `id` bigint(8) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `prenom` varchar(255) DEFAULT NULL,
-  `date_naissance` varchar(255) DEFAULT NULL,
+  `date_naissance` date DEFAULT NULL,
   `annee_adhesion` varchar(255) DEFAULT NULL,
   `profession` varchar(255) DEFAULT NULL,
   `telephone` varchar(255) DEFAULT NULL,
   `mail` varchar(255) DEFAULT NULL,
   `lieu_residence` varchar(255) DEFAULT NULL,
-  `Categorie_id` int(11) NOT NULL
+  `quartier_origine` varchar(255) DEFAULT NULL,
+  `concession` varchar(255) DEFAULT NULL,
+  `Categorie_id` bigint(8) NOT NULL,
+  `Region_id` bigint(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `membre`
 --
 
-INSERT INTO `membre` (`id`, `nom`, `prenom`, `date_naissance`, `annee_adhesion`, `profession`, `telephone`, `mail`, `lieu_residence`, `Categorie_id`) VALUES
-(1, 'eefefe', 'dzdzd', '2020-04-30', '2002', 'dzdzd', 'dzdzdzdz', 'dzdzdzdzd', 'dzdzdz', 10),
-(2, 'eefefeddgdg', 'dzdzdrgrgr', '2020-04-30', '2002', 'dzdzd', 'dzdzdzdz', 'dzdzdzdzdvv', 'dzdzdz', 10),
-(3, 'ddgfg', 'dfdddggf', '2020-05-14', '2003', 'hghh', 'tyjjt', 'hhggh', 'gbghn', 8),
-(4, 'fefv', 'ffdfd', '2020-04-29', '2001', 'dvdv', 'grgrgr', 'grhtt', 'rghth', 6),
-(5, 'fenfefo', 'efjoeof', '2020-04-29', '2005', 'effefe', 'efeffef', 'gfefe', 'efeef', 8),
-(6, 'DIATTA', 'Fabacary', '2020-04-27', '2002', 'BusinessMan', '775233569', 'fabi4530s@hotmail.fr', 'Keur Mbaye Fall', 1);
+INSERT INTO `membre` (`id`, `nom`, `prenom`, `date_naissance`, `annee_adhesion`, `profession`, `telephone`, `mail`, `lieu_residence`, `quartier_origine`, `concession`, `Categorie_id`, `Region_id`) VALUES
+(1, 'DIATTA', 'Fabacary', '2018-05-23', '2015', 'BusinessMan', '77 523 35 69', 'fabi@hotmail.fr', 'Keur Mbaye Fall', 'Bourombone', 'Kabel', 1, 1),
+(2, 'DIATTA', 'Mouhamed', '2020-06-01', '2010', 'Banquier', '77 545 18 52', 'amethdiatta@hotmail.fr', 'Keur Mbaye Fall', 'Bourombone', 'Kabel', 1, 1),
+(3, 'fhoefhefo', 'fjeofeooej', '2020-06-02', '2020', 'dkzdzkd', 'fkpefpe', 'ffkfpefkepk', 'jfoejfoejf', NULL, 'fheihfeifhe', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +140,7 @@ INSERT INTO `membre` (`id`, `nom`, `prenom`, `date_naissance`, `annee_adhesion`,
 --
 
 CREATE TABLE `pays` (
-  `id` int(11) NOT NULL,
+  `id` bigint(8) NOT NULL,
   `nom` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -194,7 +160,7 @@ INSERT INTO `pays` (`id`, `nom`) VALUES
 --
 
 CREATE TABLE `promoteur_cotisation` (
-  `id` int(11) NOT NULL,
+  `id` bigint(8) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `lieu` varchar(255) DEFAULT NULL,
   `siege` varchar(255) DEFAULT NULL
@@ -207,7 +173,7 @@ CREATE TABLE `promoteur_cotisation` (
 INSERT INTO `promoteur_cotisation` (`id`, `nom`, `lieu`, `siege`) VALUES
 (1, 'Honoro', 'Tendouck', 'Dakar'),
 (2, 'Erisiber', 'Tendouck', 'Tendouck'),
-(3, 'Construction Maison', 'Tendouck', 'Tendouck');
+(3, 'Cons. Maison', 'Tendouck', 'Tendouck');
 
 -- --------------------------------------------------------
 
@@ -216,9 +182,9 @@ INSERT INTO `promoteur_cotisation` (`id`, `nom`, `lieu`, `siege`) VALUES
 --
 
 CREATE TABLE `region` (
-  `id` int(11) NOT NULL,
+  `id` bigint(8) NOT NULL,
   `nom` varchar(45) DEFAULT NULL,
-  `Pays_id` int(11) NOT NULL
+  `Pays_id` bigint(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -252,14 +218,6 @@ CREATE TABLE `users` (
 --
 
 --
--- Index pour la table `adresse`
---
-ALTER TABLE `adresse`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Adresse_Membre1_idx` (`Membre_id`),
-  ADD KEY `fk_Adresse_Departement1_idx` (`Departement_id`);
-
---
 -- Index pour la table `categorie`
 --
 ALTER TABLE `categorie`
@@ -270,7 +228,7 @@ ALTER TABLE `categorie`
 --
 ALTER TABLE `cotisation`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Cotisation_Membre_idx` (`Membre_id`),
+  ADD KEY `fk_Cotisation_Membre1_idx` (`Membre_id`),
   ADD KEY `fk_Cotisation_Cotisation_Annuelle1_idx` (`Cotisation_Annuelle_id`);
 
 --
@@ -278,22 +236,16 @@ ALTER TABLE `cotisation`
 --
 ALTER TABLE `cotisation_annuelle`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Cotisation_Annuelle_Categorie1_idx` (`Categorie_id`),
-  ADD KEY `fk_Cotisation_Annuelle_Promoteur_Cotisation1_idx` (`Promoteur_Cotisation_id`);
-
---
--- Index pour la table `departement`
---
-ALTER TABLE `departement`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Departement_Region1_idx` (`Region_id`);
+  ADD KEY `fk_Cotisation_Annuelle_Promoteur_Cotisation1_idx` (`Promoteur_Cotisation_id`),
+  ADD KEY `fk_Cotisation_Annuelle_Categorie1_idx` (`Categorie_id`);
 
 --
 -- Index pour la table `membre`
 --
 ALTER TABLE `membre`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Membre_Categorie1_idx` (`Categorie_id`);
+  ADD KEY `fk_Membre_Categorie1_idx` (`Categorie_id`),
+  ADD KEY `fk_Membre_Region1_idx` (`Region_id`);
 
 --
 -- Index pour la table `pays`
@@ -325,58 +277,22 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT pour la table `adresse`
---
-ALTER TABLE `adresse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `categorie`
---
-ALTER TABLE `categorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT pour la table `cotisation`
 --
 ALTER TABLE `cotisation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `cotisation_annuelle`
 --
 ALTER TABLE `cotisation_annuelle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT pour la table `departement`
---
-ALTER TABLE `departement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT pour la table `pays`
---
-ALTER TABLE `pays`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `promoteur_cotisation`
---
-ALTER TABLE `promoteur_cotisation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `region`
---
-ALTER TABLE `region`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `users`
@@ -389,22 +305,13 @@ ALTER TABLE `users`
 --
 
 --
--- Contraintes pour la table `adresse`
---
-ALTER TABLE `adresse`
-  ADD CONSTRAINT `FKoxnk6mdkfcqkskm18j7an6ea7` FOREIGN KEY (`Membre_id`) REFERENCES `membre` (`id`),
-  ADD CONSTRAINT `FKp63dsitdlb0hat4yomw6g7j91` FOREIGN KEY (`Departement_id`) REFERENCES `departement` (`id`),
-  ADD CONSTRAINT `fk_Adresse_Departement1` FOREIGN KEY (`Departement_id`) REFERENCES `departement` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Adresse_Membre1` FOREIGN KEY (`Membre_id`) REFERENCES `membre` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Contraintes pour la table `cotisation`
 --
 ALTER TABLE `cotisation`
   ADD CONSTRAINT `FKap2xjbq6v0pi5o1fg9qdhrl4o` FOREIGN KEY (`Membre_id`) REFERENCES `membre` (`id`),
   ADD CONSTRAINT `FKiysydo2uxfpoxyvxfdbj37fcw` FOREIGN KEY (`Cotisation_Annuelle_id`) REFERENCES `cotisation_annuelle` (`id`),
   ADD CONSTRAINT `fk_Cotisation_Cotisation_Annuelle1` FOREIGN KEY (`Cotisation_Annuelle_id`) REFERENCES `cotisation_annuelle` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Cotisation_Membre` FOREIGN KEY (`Membre_id`) REFERENCES `membre` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Cotisation_Membre1` FOREIGN KEY (`Membre_id`) REFERENCES `membre` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `cotisation_annuelle`
@@ -416,18 +323,13 @@ ALTER TABLE `cotisation_annuelle`
   ADD CONSTRAINT `fk_Cotisation_Annuelle_Promoteur_Cotisation1` FOREIGN KEY (`Promoteur_Cotisation_id`) REFERENCES `promoteur_cotisation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `departement`
---
-ALTER TABLE `departement`
-  ADD CONSTRAINT `FKh8gowqmuphi5bw438h1ikoal8` FOREIGN KEY (`Region_id`) REFERENCES `region` (`id`),
-  ADD CONSTRAINT `fk_Departement_Region1` FOREIGN KEY (`Region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Contraintes pour la table `membre`
 --
 ALTER TABLE `membre`
+  ADD CONSTRAINT `FKb6cp3teilmw853iqvqbjecqgp` FOREIGN KEY (`Region_id`) REFERENCES `region` (`id`),
   ADD CONSTRAINT `FKmqn9sh4wx4h7cn0ijep5jkoro` FOREIGN KEY (`Categorie_id`) REFERENCES `categorie` (`id`),
-  ADD CONSTRAINT `fk_Membre_Categorie1` FOREIGN KEY (`Categorie_id`) REFERENCES `categorie` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Membre_Categorie1` FOREIGN KEY (`Categorie_id`) REFERENCES `categorie` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Membre_Region1` FOREIGN KEY (`Region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `region`

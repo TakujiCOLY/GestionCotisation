@@ -17,7 +17,7 @@ import java.util.Date;
 public class Cotisation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int montant;
     private String detailDonMateriel;
     private Date dateCotisation;

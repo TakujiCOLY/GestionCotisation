@@ -18,7 +18,7 @@ import java.util.Collection;
 public class CotisationAnnuelle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String libelle;
     private String annee;
     private int montant;

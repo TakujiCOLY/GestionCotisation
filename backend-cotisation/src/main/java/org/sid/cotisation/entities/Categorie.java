@@ -16,7 +16,7 @@ import java.util.Collection;
 public class Categorie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nom;
     @OneToMany(mappedBy = "categorie")
     private Collection<CotisationAnnuelle> cotisationAnnuelles;
