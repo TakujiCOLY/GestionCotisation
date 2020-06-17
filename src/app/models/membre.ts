@@ -7,5 +7,8 @@ export class Membre {
   telephone: String;
   mail: String;
   lieuResidence: String;
+  quartierOrigine: String;
+  concession: String;
   categorie: String;
+  region: String;
 }

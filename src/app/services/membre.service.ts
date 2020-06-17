@@ -33,10 +33,18 @@ export class MembreService {
     );
   }
 
-  public getMembreSearch(nom: string, prenom: string, categorie: string): Observable<MembreP[]> {
-    return this.http.get<GetResponseMembre>(this.host + '/membres/search/byName?nom=' + nom + '&prenom=' + prenom + '&categorie=' + categorie + '&projection=M').pipe(
+  public getMembreSearch(membre: any): Observable<MembreP[]> {
+    return this.http.get<GetResponseMembre>(this.host + '/membres/search/byName?nom=' + membre.nom + '&prenom=' + membre.prenom + '&categorie=' + membre.categorie + '&anneeAdhesion='+membre.anneeAdhesion+'&pays='+membre.pays+'&region='+membre.region+'&projection=M').pipe(
       map(response => response._embedded.membres)
     )
+  }
+
+  public getAnneeAdhesions(): Observable<String[]> {
+    return this.http.get<String[]>(this.host + '/membres/search/anneeAdhesions');
+  }
+
+  public getHistoCotAnnuelles(id): Observable<Object[]> {
+    return this.http.get<Object[]>(this.host + '/membres/search/histoCotAnnuelles/'+ id);
   }
 
   public add(membre: Membre, url: String) {

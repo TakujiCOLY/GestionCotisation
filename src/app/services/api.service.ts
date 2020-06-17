@@ -8,6 +8,7 @@ import { RegionP } from '../models/regionP';
 import { DepartementP } from '../models/departementP';
 import { PromoteurCotisation } from '../models/promoteurCotisation';
 import { CotisationAnnuelleP } from '../models/cotisationAnnuelleP';
+import { AdresseP } from '../models/adresseP';
 
 @Injectable({
   providedIn: 'root'
@@ -58,17 +59,17 @@ export class ApiService {
     )
   }
 
-  public getDepartement(): Observable<DepartementP[]> {
-    return this.http.get<GetResponseDepartements>(this.host + '/departements/search/tri?projection=Dpt').pipe(
-      map(response => response._embedded.departements)
-    );
-  }
+  // public getDepartement(): Observable<DepartementP[]> {
+  //   return this.http.get<GetResponseDepartements>(this.host + '/departements/search/tri?projection=Dpt').pipe(
+  //     map(response => response._embedded.departements)
+  //   );
+  // }
 
-  public getDepartementSearch(nom: string, region: string): Observable<DepartementP[]> {
-    return this.http.get<GetResponseDepartements>(this.host + '/departements/search/byRegion?nom=' + nom + '&region=' + region + '&projection=Dpt').pipe(
-      map(response => response._embedded.departements)
-    );
-  }
+  // public getDepartementSearch(nom: string, region: string): Observable<DepartementP[]> {
+  //   return this.http.get<GetResponseDepartements>(this.host + '/departements/search/byRegion?nom=' + nom + '&region=' + region + '&projection=Dpt').pipe(
+  //     map(response => response._embedded.departements)
+  //   );
+  // }
 
   public getPromoteurs(): Observable<PromoteurCotisation[]> {
     return this.http.get<GetResponsePromoteurCotisations>(this.host + '/promoteurCotisations/search/tri').pipe(
@@ -93,6 +94,14 @@ export class ApiService {
       map(response => response._embedded.cotisationAnnuelles)
     );
   }
+
+  public getCotisationAnnuellesAnnees(): Observable<String[]> {
+    return this.http.get<String[]>(this.host + '/cotisationAnnuelles/search/annees');
+  }
+
+  // public getAdresseUnique(id: string): Observable<AdresseP> {
+  //   return this.http.get<AdresseP>(this.host + '/adresses/'+id+'?projection=Adr');
+  // }
 
   public get(url: string) {
     return this.http.get(this.host + url);
@@ -126,11 +135,11 @@ interface GetResponseRegions {
     regions: RegionP[];
   }
 }
-interface GetResponseDepartements {
-  _embedded: {
-    departements: DepartementP[];
-  }
-}
+// interface GetResponseDepartements {
+//   _embedded: {
+//     departements: DepartementP[];
+//   }
+// }
 interface GetResponsePromoteurCotisations {
   _embedded: {
     promoteurCotisations: PromoteurCotisation[];

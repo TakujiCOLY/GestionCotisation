@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Membre } from '../models/membre';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Categorie } from '../models/categorie';
+import { Pays } from '../models/pays';
+import { RegionP } from '../models/regionP';
 
 @Component({
   selector: 'app-membre-add',
@@ -13,6 +15,8 @@ import { Categorie } from '../models/categorie';
 export class MembreAddComponent implements OnInit {
   public membreAddForm: FormGroup;
   public categories: Categorie[];
+  public pays: Pays[];
+  public regions: RegionP[];
   public submitted: boolean;
   public maxDate = Date.now();
 
@@ -20,23 +24,36 @@ export class MembreAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.membreAddForm = this.fb.group({
-      nom: [''],
-      prenom: [''],
-      dateNaissance: [''],
-      anneeAdhesion: [''],
+      nom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      dateNaissance: ['', Validators.required],
+      anneeAdhesion: ['', Validators.required],
       profession: [''],
-      telephone: [''],
+      telephone: ['', Validators.required],
       mail: [''],
-      lieuResidence: [''],
-      categorie: ['']
+      lieuResidence: ['', Validators.required],
+      quartierOrigne: ['', Validators.required],
+      concession: ['', Validators.required],
+      categorie: ['', Validators.required],
+      pays: ['', Validators.required],
+      region: ['', Validators.required]
     });
     this.submitted = false;
-    this.getCategorie();
+    this.getData();
   }
 
-  public getCategorie() {
+  public getData() {
     this.api.getCategories().subscribe(data => {
       this.categories = data;
+    });
+    this.api.getPays().subscribe(data => {
+      this.pays = data;
+    });
+  }
+
+  public getRegions(event: string) {
+    this.api.getRegionSearch('', event).subscribe(data => {
+      this.regions = data;
     });
   }
 
@@ -56,7 +73,10 @@ export class MembreAddComponent implements OnInit {
     membre.telephone = this.membreAddForm.value.telephone;
     membre.mail = this.membreAddForm.value.mail;
     membre.lieuResidence = this.membreAddForm.value.lieuResidence;
+    membre.quartierOrigine = this.membreAddForm.value.quartierOrigine;
+    membre.concession = this.membreAddForm.value.concession;
     membre.categorie = '/categories/' + this.membreAddForm.value.categorie;
+    membre.region = '/regions/'+this.membreAddForm.value.region;
     this.api.add(membre, '/membres').subscribe(data => {
       alert('Le membre ' + data['prenom'] + ' ' + data['nom'] + ' a été ajouté avec succès');
       this.router.navigate(['/membre-detail/', data['id']]);

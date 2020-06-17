@@ -101,7 +101,7 @@
 .app-sidebar-title {
   font-weight: 700;
   color: #adb5bd;
-  font-size: .9rem;
+  font-size: .8rem;
   text-transform: uppercase;
   letter-spacing: .1em;
   margin-left: 10px;
@@ -124,7 +124,11 @@
   padding: 12px 15px;
   border-left: 2px solid transparent;
   color: white;
-  font-size: .9rem;
+
+  span {
+    font-size: .7rem;
+  }
+
 
   &:hover,
   &:focus,
@@ -145,8 +149,11 @@
   align-items: center;
   border-left: 2px solid #33b35a;
   color: white;
-  font-size: .8rem;
   padding: 12px 15px;
+
+  span {
+    font-size: .7rem;
+  }
 
   &:hover,
   &:focus {
@@ -183,6 +190,6 @@
   background: $color-menu;
   border-left: 1px solid white;
   color: white;
-  font-size: .9em;
+  font-size: .8rem;
   padding: 0 10px;
 }

@@ -46,6 +46,10 @@ export class AdresseComponent implements OnInit {
     });
   }
 
+  get f() {
+    return this.adresseForm.controls;
+  }
+
   public getRegion(event: any) {
     if (event.target.value != "") {
       this.api.getRegionSearch('', event.target.value).subscribe(data => {
@@ -56,9 +60,9 @@ export class AdresseComponent implements OnInit {
 
   public getDepartement(event: any) {
     if (event.target.value != '') {
-      this.api.getDepartementSearch('', event.target.value).subscribe(data => {
-        this.departements = data;
-      });
+      // this.api.getDepartementSearch('', event.target.value).subscribe(data => {
+      //   this.departements = data;
+      // });
     }
   }
 
@@ -69,6 +73,7 @@ export class AdresseComponent implements OnInit {
     adresse.quartierOrigine = this.adresseForm.value.quartier;
     adresse.concession = this.adresseForm.value.concession;
     adresse.departement = '/departements/'+this.adresseForm.value.departement;
+    adresse.membre = '/membres/'+this.membre.id;
     this.api.add(adresse, '/adresses/').subscribe(data => {
       alert('Adresse ajouté avec succès');
       this.router.navigate(['/membre-detail/', this.membre.id]);

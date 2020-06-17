@@ -1,6 +1,5 @@
 import { Categorie } from './categorie';
-import { AdresseP } from './adresseP';
-import { CotisationP } from './cotisationP';
+import { RegionP } from './regionP';
 
 export class MembreP {
     id: number;
@@ -12,6 +11,8 @@ export class MembreP {
     telephone: string;
     mail: string;
     lieuResidence: string;
+    quartierOrigine: string;
+    concession: string;
     categorie: Categorie;
-    adresses: AdresseP[];
+    region: RegionP;
 }

@@ -53,13 +53,13 @@ export class PromoteurCotisationComponent implements OnInit {
     promoteur.siege = this.promoteurAddForm.value.siege;
     if (this.promoteurAddForm.value.id != '') {
       this.api.update(promoteur, '/promoteurCotisations/'+this.promoteurAddForm.value.id).subscribe(data => {
-        alert('Le promoteur '+data['nom']+' a été modifié avec succès');
+        alert('Le promoteur ' + data['nom'] + ' a été modifié avec succès');
         this.getData();
         this.effacerChamps();
       });
     } else {
       this.api.add(promoteur, '/promoteurCotisations').subscribe(data => {
-        alert('Le promoteur '+data['nom']+' a été ajouté avec succès');
+        alert('Le promoteur ' + data['nom'] + ' a été ajouté avec succès');
         this.getData();
         this.effacerChamps();
       });

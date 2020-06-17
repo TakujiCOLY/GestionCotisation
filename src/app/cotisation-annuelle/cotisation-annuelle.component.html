@@ -69,10 +69,10 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4">
                                     <div class="form-group">
-                                        <label>Promoteur cotisation</label>
+                                        <label>Type</label>
                                         <select class="form-control" formControlName="promoteur" 
                                         [ngClass]="{'is-invalid': submittedAdd && f.promoteur.errors}">
-                                            <option value="">Choisir le promoteur</option>
+                                            <option value="">Choisir le type</option>
                                             <option *ngFor="let promoteur of promoteurs" value="{{promoteur.id}}">{{promoteur.nom}}</option>
                                         </select>
                                     </div>
@@ -111,9 +111,9 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4">
                                     <div class="form-group">
-                                        <label>Promoteur cotisation</label>
+                                        <label>Type</label>
                                         <select class="form-control" formControlName="promoteur">
-                                            <option value="">Choisir le promoteur</option>
+                                            <option value="">Choisir le type</option>
                                             <option *ngFor="let promoteur of promoteurs" value="{{promoteur.nom}}">{{promoteur.nom}}</option>
                                         </select>
                                     </div>

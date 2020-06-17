@@ -33,14 +33,14 @@ const routes: Routes = [
       { path: 'cotisations', component: CotisationComponent },
       { path: 'membre-detail/:id/cot-add', component: CotisationAddComponent },
       { path: 'membre-detail/:id/cot-upd/:id_cot', component: CotisationUpdateComponent },
-      { path: 'membre-detail/:id/adr-add', component: AdresseComponent },
-      { path: 'membre-detail/:id/adr-upd/:id_adr', component: AdresseUpdateComponent },
+      // { path: 'membre-detail/:id/adr-add', component: AdresseComponent },
+      // { path: 'membre-detail/:id/adr-upd/:id_adr', component: AdresseUpdateComponent },
       { path: 'cot-annuelles', component: CotisationAnnuelleComponent },
       { path: 'categories', component: CategorieComponent },
       { path: 'promoteur-cot', component: PromoteurCotisationComponent },
       { path: 'pays', component: PaysComponent },
       { path: 'regions', component: RegionComponent },
-      { path: 'departements', component: DepartementComponent },
+      // { path: 'departements', component: DepartementComponent },
       { path: 'adresses', component: AdresseComponent }
     ]
   },

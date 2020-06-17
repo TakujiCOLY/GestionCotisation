@@ -1,68 +1,107 @@
 <div class="card">
     <div class="card-header">
-        <h4>Modifier un membre</h4>
+        <h4>Modifier du membre {{membre.prenom}} {{membre.nom}}</h4>
     </div>
     <div class="card-body">
         <form [formGroup]="membreForm" (ngSubmit)="updateMembre()">
             <div class="row">
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Prénom</label>
-                        <input type="text" class="form-control" placeholder="Prénom" formControlName="prenom">
+                        <input type="text" class="form-control" placeholder="Prénom" formControlName="prenom"
+                            [ngClass]="{'is-invalid': submitted && f.prenom.errors}">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Nom</label>
-                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
+                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom"
+                            [ngClass]="{'is-invalid': submitted && f.nom.errors}">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Catégorie</label>
-                        <select class="form-control" formControlName="categorie">
+                        <select class="form-control" formControlName="categorie"
+                            [ngClass]="{'is-invalid': submitted && f.categorie.errors}">
                             <option value="">Choisir la catégorie</option>
-                            <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.nom}}</option>
+                            <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.nom}}
+                            </option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Profession</label>
                         <input type="text" class="form-control" placeholder="Profession" formControlName="profession">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Date de naissance</label>
                         <input type="date" class="form-control" placeholder="Date de naissance"
+                            [ngClass]="{'is-invalid': submitted && f.dateNaissance.errors}"
                             formControlName="dateNaissance" max="{{maxDate | date: 'yyyy-MM-dd'}}">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Année adhésion</label>
                         <input type="text" class="form-control" placeholder="Année adhésion"
-                            formControlName="anneeAdhesion">
+                            formControlName="anneeAdhesion"
+                            [ngClass]="{'is-invalid': submitted && f.anneeAdhesion.errors}">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Téléphone</label>
                         <input type="text" class="form-control" placeholder="Téléphone" formControlName="telephone">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Email</label>
                         <input type="text" class="form-control" placeholder="Email" formControlName="mail">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        <label>Pays</label>
+                        <select class="form-control" formControlName="pays" (change)="getRegions($event.target.value)"
+                            [ngClass]="{'is-invalid': submitted && f.pays.errors}">
+                            <option value="">Choisir le pays</option>
+                            <option *ngFor="let pay of pays" value="{{pay.nom}}">{{pay.nom}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        <label>Régions</label>
+                        <select class="form-control" formControlName="region"
+                        [ngClass]="{'is-invalid': submitted && f.region.errors}">
+                            <option value="">Choisir la région</option>
+                            <option *ngFor="let region of regions" value="{{region.id}}">{{region.nom}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <label>Lieu résidence</label>
                         <input type="text" class="form-control" placeholder="Lieu résidence"
                             formControlName="lieuResidence">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        <label>Quartier origine</label>
+                        <input type="text" class="form-control" placeholder="Quartier origine"
+                            formControlName="quartierOrigine">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        <label>Concession</label>
+                        <input type="text" class="form-control" placeholder="Concession" formControlName="concession">
                     </div>
                 </div>
             </div>

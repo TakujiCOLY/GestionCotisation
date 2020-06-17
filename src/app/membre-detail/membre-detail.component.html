@@ -1,79 +1,73 @@
 <div class="row mb-3">
-    <div class="col-md-4 col-sm-4">
+    <div class="col-md-3 col-sm-3">
         <div class="card mb-2">
             <div class="card-header">
-                <h6 class="card-header__title">Identification</h6>
+                <h6 class="card-header__title">Fiche Membre</h6>
                 <a (click)="updateMembre()" class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
                     title="Modifier"><i class="fa fa-edit"></i></a>
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <label class="mr-1">Prénom :</label>{{membre.prenom | uppercase}}
+                    <label class="mr-1">Prénom:</label>
+                    {{membre.prenom | uppercase}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Nom :</label>{{membre.nom | uppercase}}
+                    <label class="mr-1">Nom:</label>
+                    {{membre.nom | uppercase}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Profession :</label>{{membre.profession}}
+                    <label class="mr-1">Profession:</label>
+                    {{membre.profession}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Date de naissance :</label>{{membre.dateNaissance}}
+                    <label class="mr-1">Date naissance:</label>
+                    {{membre.dateNaissance}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Année adhésion :</label>{{membre.anneeAdhesion}}
+                    <label class="mr-1">Année adhésion:</label>
+                    {{membre.anneeAdhesion}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Téléphone :</label>{{membre.telephone}}
+                    <label class="mr-1">Téléphone:</label>
+                    {{membre.telephone}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Email :</label>{{membre.mail}}
+                    <label class="mr-1">Email:</label>
+                    {{membre.mail}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Lieu résidence :</label>{{membre.lieuResidence}}
+                    <label class="mr-1">Lieu résidence:</label>
+                    {{membre.lieuResidence}}
                 </div>
                 <div class="form-group">
-                    <label class="mr-1">Catégorie :</label>{{membre.categorie.nom}}
+                    <label class="mr-1">Catégorie:</label>
+                    {{membre.categorie.nom}}
                 </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-header__title">Adresse</h6>
-                <a *ngIf="membre.adresses.length > 0; else elseBlock" (click)="updateAdr(membre.adresses[0].id)"
-                    class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Modifier l'adresse"><i
-                        class="fa fa-edit"></i></a>
-                <ng-template #elseBlock>
-                    <a (click)="addAdr()" class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
-                        title="Ajouter une adresse"><i class="fa fa-plus-circle"></i></a>
-                </ng-template>
-            </div>
-            <div class="card-body">
-                <div *ngIf="membre.adresses.length > 0">
-                    <div class="form-group">
-                        <label class="mr-1">Quartier Origine :</label>{{membre.adresses[0].quartierOrigine}}
-                    </div>
-                    <div class="form-group">
-                        <label class="mr-1">Concession :</label>{{membre.adresses[0].concession}}
-                    </div>
-                    <div class="form-group">
-                        <label class="mr-1">Pays :</label>{{membre.adresses[0].departement.region.pays.nom}}
-                    </div>
-                    <div class="form-group">
-                        <label class="mr-1">Région :</label>{{membre.adresses[0].departement.region.nom}}
-                    </div>
-                    <div class="form-group">
-                        <label class="mr-1">Département :</label>{{membre.adresses[0].departement.nom}}
-                    </div>
+                <div class="form-group">
+                    <label class="mr-1">Quartier Origine:</label>
+                    {{membre.quartierOrigine}}
+                </div>
+                <div class="form-group">
+                    <label class="mr-1">Concession:</label>
+                    {{membre.concession}}
+                </div>
+                <div class="form-group">
+                    <label class="mr-1">Pays:</label>
+                    {{membre.region.pays.nom}}
+                </div>
+                <div class="form-group">
+                    <label class="mr-1">Région:</label>
+                    {{membre.region.nom}}
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-sm-8">
+    <div class="col-md-9 col-sm-9">
         <div class="card mb-3">
             <div class="card-header">
                 <h6 class="card-header__title">Historique cotisation</h6>
-                <a href="#" routerLink="/cotisation-add" class="btn btn-success" data-toggle="tooltip"
-                    data-placement="bottom" title="Ajouter une cotisation"><i class="fa fa-plus-circle"></i></a>
+                <a (click)="addCotisation()" class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
+                    title="Ajouter une cotisation"><i class="fa fa-plus-circle"></i></a>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-sm">
@@ -81,22 +75,24 @@
                         <tr class="text-center">
                             <th>Montant</th>
                             <th>Don matériel</th>
+                            <th>Type Cotisation</th>
                             <th>Date</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <!-- <tr *ngFor="let cotisation of cotisations | paginate: {itemsPerPage: 9, currentPage: p}">
+                        <tr *ngFor="let cotisation of cotisations | paginate: {itemsPerPage: 9, currentPage: p}">
                             <td>{{cotisation.montant}} FCFA</td>
-                            <td>{{cotisation.don}}</td>
-                            <td>{{cotisation.date}}</td>
-                            <td><a href="#" routerLink="/cotisation-update" class="btn btn-success"
+                            <td>{{cotisation.donMateriel}}</td>
+                            <td>{{cotisation.cotisationAnnuelle.promoteurCotisation.nom}}</td>
+                            <td>{{cotisation.dateCotisation.split("T")[0]}}</td>
+                            <td><a (click)="updateCotisation(cotisation.id)" routerLink="/cotisation-update" class="btn btn-success"
                                     data-toggle="tooltip" data-placement="bottom" title="Modifier la cotisation"><i
                                         class="fa fa-edit"></i></a>
                                 <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
                                     title="Supprimer la cotisation"><i class="fa fa-trash-alt"></i></a>
                             </td>
-                        </tr> -->
+                        </tr>
                     </tbody>
                 </table>
                 <div class="text-right" *ngIf="cotisations">
@@ -113,19 +109,21 @@
                     <thead class="text-center">
                         <tr>
                             <th>Année</th>
+                            <th>Type Cotisation</th>
                             <th>Montant Annuel</th>
                             <th>Montant cotisé</th>
                             <th>Montant restant</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <!-- <tr
+                        <tr
                             *ngFor="let cotisation of cotisationAnnuelles | paginate: {itemsPerPage: 7, currentPage: p}">
-                            <td>{{cotisation.annee}}</td>
-                            <td>{{cotisation.montantAnnuel}} FCFA</td>
-                            <td>{{cotisation.montantCotise}} FCFA</td>
-                            <td>{{cotisation.montantRestant}} FCFA</td>
-                        </tr> -->
+                            <td>{{cotisation[0]}}</td>
+                            <td>{{cotisation[1]}}</td>
+                            <td>{{cotisation[2]}} FCFA</td>
+                            <td>{{cotisation[3]}} FCFA</td>
+                            <td>{{cotisation[2] - cotisation[3]}} FCFA</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="text-right" *ngIf="cotisations">

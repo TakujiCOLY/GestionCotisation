@@ -1,26 +1,62 @@
 <div class="row">
-    <div class="col-md-3 col-sm-3">
+    <div class="col-md-12 col-sm-12 mb-3">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-header__title">Rechercher membre</h4>
             </div>
             <div class="card-body">
                 <form [formGroup]="searchMembreForm" (ngSubmit)="searchMembre()">
-                    <div class="form-group">
-                        <label>Prénom</label>
-                        <input type="text" class="form-control" placeholder="Prénom" formControlName="prenom">
-                    </div>
-                    <div class="form-group">
-                        <label>Nom</label>
-                        <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
-                    </div>
-                    <div class="form-group">
-                        <label>Catégorie</label>
-                        <select class="form-control" formControlName="categorie">
-                            <option value="">Choisir la Catégorie</option>
-                            <option *ngFor="let categorie of categories" value="{{categorie.nom}}">{{categorie.nom}}
-                            </option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                <input type="text" class="form-control" placeholder="Prénom" formControlName="prenom">
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Catégorie</label>
+                                <select class="form-control" formControlName="categorie">
+                                    <option value="">Choisir la Catégorie</option>
+                                    <option *ngFor="let categorie of categories" value="{{categorie.nom}}">
+                                        {{categorie.nom}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Année adhésion</label>
+                                <select class="form-control" formControlName="anneeAdhesion">
+                                    <option value="">Choisir année</option>
+                                    <option *ngFor="let annee of annees" value="{{annee}}">{{annee}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Pays</label>
+                                <select class="form-control" formControlName="pays" (change)="getRegions($event.target.value)">
+                                    <option value="">Choisir le pays</option>
+                                    <option *ngFor="let pay of pays" value="{{pay.nom}}">{{pay.nom}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Régions</label>
+                                <select class="form-control" formControlName="region">
+                                    <option value="">Choisir la région</option>
+                                    <option *ngFor="let region of regions" value="{{region.nom}}">{{region.nom}}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Rechercher</button>
@@ -32,12 +68,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-9 col-sm-9">
+    <div class="col-md-12 col-sm-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-header__title">Liste des membres</h4>
-                <a href="#" routerLink="/membre-add" class="btn btn-success" data-toggle="tooltip"
-                    data-placement="bottom" title="Ajouter un membre"><i class="fa fa-plus-circle"></i></a>
+                <a href="#" routerLink="/membre-add" class="btn btn-success">Nouveau membre</a>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-sm">
@@ -45,17 +80,19 @@
                         <tr>
                             <th>Nom</th>
                             <th>Prénom</th>
-                            <th>Profession</th>
                             <th>Catégorie</th>
+                            <th>Profession</th>
+                            <th>Année adhésion</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody *ngIf="membres">
                         <tr *ngFor="let membre of membres | paginate : {itemsPerPage: 10, currentPage: p}">
                             <td>{{membre.nom | uppercase}}</td>
                             <td>{{membre.prenom}}</td>
-                            <td>{{membre.profession}}</td>
                             <td>{{membre.categorie.nom}}</td>
+                            <td>{{membre.profession}}</td>
+                            <td>{{membre.anneeAdhesion}}</td>
                             <td class="form-table">
                                 <form #detailForm="ngForm" (ngSubmit)="detailMembre(detailForm.value)">
                                     <input type="hidden" name="id" [ngModel]="membre.id">

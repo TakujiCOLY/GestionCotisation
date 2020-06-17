@@ -17,6 +17,7 @@ export class MembreDetailComponent implements OnInit {
   public membre: MembreP;
   public adresses: AdresseP[];
   public cotisations: CotisationP[];
+  public cotisationAnnuelles: Object[];
   p: number = 1;
 
   constructor(private router: Router, private api: MembreService, private route: ActivatedRoute, private apiCot: CotisationService) { }
@@ -30,22 +31,32 @@ export class MembreDetailComponent implements OnInit {
     this.api.getById(idMembre).subscribe(data => {
       this.membre = data;
     });
-    this.apiCot.getCotisationsMembre(idMembre).subscribe(data => {
+    this.apiCot.getCotisationsMembre(parseInt(idMembre)).subscribe(data => {
       this.cotisations = data;
-      console.log(data);
     });
+    this.api.getHistoCotAnnuelles(idMembre).subscribe(data => {
+      this.cotisationAnnuelles = data;
+    })
   }
 
   updateMembre() {
     this.router.navigate(['/membre-upd/', this.membre.id]);
   }
 
-  addAdr() {
-    this.router.navigate(['membre-detail', this.membre.id, 'adr-add']);
+  addAdresse() {
+    // this.router.navigate(['membre-detail', this.membre.id, 'adr-add']);
   }
 
-  updateAdr(id) {
-    this.router.navigate(['membre-detail', this.membre.id, 'adr-upd', id]);
+  updateAdresse(id) {
+    // this.router.navigate(['membre-detail', this.membre.id, 'adr-upd', id]);
+  }
+
+  addCotisation() {
+    this.router.navigate(['membre-detail', this.membre.id, 'cot-add']);
+  }
+
+  updateCotisation(id) {
+    this.router.navigate(['membre-detail', this.membre.id, 'cot-upd', id]);
   }
 
 }

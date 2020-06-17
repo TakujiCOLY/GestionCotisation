@@ -17,10 +17,14 @@ export class CotisationService {
 
   constructor(private http: HttpClient) { }
 
-  public getCotisationsMembre(id): Observable<CotisationP[]>{
-    return this.http.get<GetResponseCotisations>(this.host + '/cotisations/search/byMembre?membre='+id+'&projection=Ct').pipe(
+  public getCotisationsMembre(id): Observable<CotisationP[]> {
+    return this.http.get<GetResponseCotisations>(this.host + '/cotisations/search/byMembre?membre=' + id + '&projection=Ct').pipe(
       map(response => response._embedded.cotisations)
     );
+  }
+
+  public getCotisationUnique(id): Observable<CotisationP> {
+    return this.http.get<CotisationP>(this.host + '/cotisations/' + id + '?projection=Ct');
   }
 
   public add(cotisation: Cotisation, url: String) {

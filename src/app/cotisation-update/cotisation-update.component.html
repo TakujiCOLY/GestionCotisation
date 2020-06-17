@@ -3,26 +3,57 @@
         <h4 class="card-header__title">Modifier une cotisation</h4>
     </div>
     <div class="card-body">
-        <form action="">
+        <form [formGroup]="cotisationForm" (ngSubmit)="updateCotisation()">
             <div class="row">
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-2 col-sm-2">
                     <div class="form-group">
-                        <label>Montant</label>
-                        <input type="text" class="form-control" placeholder="Montant cotisation">
-                    </div>
-                    <div class="form-group">
-                        <label>Catégorie</label>
-                        <input type="text" class="form-control" placeholder="Catégorie">
-                    </div>
-                    <div class="form-group">
-                        <label>Date cotisation</label>
-                        <input type="date" class="form-control" placeholder="Catégorie">
+                        <label>Années</label>
+                        <select class="form-control" formControlName="annee"
+                            [ngClass]="{'is-invalid': submitted && f.annee.errors}">
+                            <option value="">Choisir l'année</option>
+                            <option *ngFor="let annee of annees" value="{{annee}}">{{annee}}</option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        <label>Type cotisations</label>
+                        <select class="form-control" formControlName="promoteur"
+                            (change)="getCotisation($event.target.value)"
+                            [ngClass]="{'is-invalid': submitted && f.promoteur.errors}">
+                            <option value="">Choisir le type</option>
+                            <option *ngFor="let promoteur of promoteurs" value="{{promoteur.nom}}">{{promoteur.nom}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2" *ngIf="cotisationAnnuelle">
+                    <div class="form-group">
+                        <label>Montant annuel</label>
+                        <p class="text-center">{{cotisationAnnuelle[0].montant}} FCFA</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2" *ngIf="cotisationAnnuelle">
+                    <div class="form-group">
+                        <label>Montant à verser</label>
+                        <input type="text" class="form-control" placeholder="Montant à cotiser"
+                            formControlName="montant"
+                            [ngClass]="{'is-invalid': submitted && cotisationForm.value.montant == '' && cotisationForm.value.detail_don_materiel == ''}">
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2" *ngIf="cotisationAnnuelle">
+                    <div class="form-group">
+                        <label>Date cotisation</label>
+                        <input type="date" class="form-control" formControlName="date_cotisation"
+                            max="{{maxDate | date: 'yyyy-MM-dd'}}"
+                            [ngClass]="{'is-invalid': submitted && f.date_cotisation.errors}">
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12"
+                    *ngIf="cotisationAnnuelle && cotisationAnnuelle[0].donMateriel == true">
                     <div class="form-group">
                         <label>Don matériel</label>
-                        <textarea name="" id="" cols="30" rows="8" placeholder="Don matériel"
+                        <textarea formControlName="detail_don_materiel" cols="30" rows="3" placeholder="Don matériel"
                             class="form-control__textarea"></textarea>
                     </div>
                 </div>

@@ -42,9 +42,9 @@ export class DepartementComponent implements OnInit {
   }
 
   public getData() {
-    this.api.getDepartement().subscribe(data => {
-      this.departements = data;
-    });
+    // this.api.getDepartement().subscribe(data => {
+    //   this.departements = data;
+    // });
   }
 
   public getPays() {
@@ -92,9 +92,9 @@ export class DepartementComponent implements OnInit {
       this.submittedSearch = true;
       return;
     }
-    this.api.getDepartementSearch(this.departementSearchForm.value.nom, this.departementSearchForm.value.region).subscribe(data => {
-      this.departements = data;
-    });
+    // this.api.getDepartementSearch(this.departementSearchForm.value.nom, this.departementSearchForm.value.region).subscribe(data => {
+    //   this.departements = data;
+    // });
 
   }
 
